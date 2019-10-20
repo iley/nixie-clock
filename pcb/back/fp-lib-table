@@ -1,0 +1,3 @@
+(fp_lib_table
+  (lib (name nixie_clock)(type KiCad)(uri /Users/iley/projects/nixie_clock/pcb/lib/nixie_clock.pretty)(options "")(descr ""))
+)
