@@ -64,11 +64,11 @@ void button_init(button_t* btn) {
 }
 
 void button_update(button_t* btn, bool input) {
+    btn->was_pressed = btn->pressed;
     // Debouncing: if last state change happened within 100ms, do nothing.
     if (millis - btn->last_change_millis < 100) {
         return;
     }
-    btn->was_pressed = btn->pressed;
     btn->pressed = input;
     if (btn->was_pressed != btn->pressed) {
         btn->last_change_millis = millis;
@@ -95,27 +95,19 @@ int main() {
         button_update(&btn1, (PINB & (1<<PB3)) == 0);
         button_update(&btn2, (PINB & (1<<PB2)) == 0);
 
-        if (btn1.pressed && !btn1.was_pressed) {
-            millis = 0;
+        if (!btn1.pressed && btn1.was_pressed) {
+            running = !running;
         }
 
         if (running) {
-            /*
             rtc_get(&dt);
             set_digits(dt.minutes >> 4,
                        dt.minutes & 0xf,
                        dt.seconds >> 4,
                        dt.seconds & 0xf);
-            */
-            uint32_t seconds = millis / 1000;
-            set_digits((seconds / 1000) % 10,
-                       (seconds / 100) % 10,
-                       (seconds / 10) % 10,
-                       seconds % 10);
         } else {
             // TODO
         }
-        // _delay_us(10);
     }
 
     while (true) {
