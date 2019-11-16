@@ -1,156 +1,123 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+#include <avr/interrupt.h>
 #include <avr/io.h>
 #include <util/delay.h>
 
+#include "rtc.h"
+
 // Maps from digit value to Nixie pin number.
-uint8_t digit_map[] = { 6, 4, 5, 1, 0, 9, 8, 2, 3, 7 };
+const uint8_t digit_map[] = { 6, 4, 5, 1, 0, 9, 8, 2, 3, 7 };
+const uint8_t out_mask_b = (1<<PB0) | (1<<PB1) | (1<<PB6) | (1<<PB7); // TUBE4
+const uint8_t out_mask_c = 0x0f; // PC0-PC3 -> TUBE3
+const uint8_t out_mask_d = 0xff; // PD0-PD3 -> TUBE1, PD4-PD7 -> TUBE2
+
+const uint16_t timer_start = (65536 - 1000);  // 1 ms at 8MHz using prescaler 8.
+
+uint32_t millis = 0;
+
+void init_timer() {
+    TCCR1A = 0x00;
+    TIMSK1 = (1 << TOIE1) ; // Timer 1 overflow interrupt.
+    TCNT1 = timer_start;
+    TCCR1B = (1<<CS11);    // Prescaler 8 => 1MHz
+    sei();
+}
+
+ISR(TIMER1_OVF_vect) {
+    millis++;
+    TCNT1 = timer_start;
+}
+
+void init_pins() {
+    DDRB = out_mask_b;
+    DDRC = out_mask_c;
+    DDRD = out_mask_d;
+    PORTB |= (1<<PB2) | (1<<PB3);  // Enable pull-ups for buttons.
+}
 
 void set_tubes(uint8_t tube1, uint8_t tube2, uint8_t tube3, uint8_t tube4) {
-    PORTD = (tube2 << 4) | tube1;
-    PORTC = (tube3 & 8) >> 3 | (tube3 & 4) >> 1 | (tube3 & 2) << 1 | (tube3 & 1) << 3;
-    PORTB = (tube4 & 0x3) << 6 | (tube4 & 0xc) >> 2;
+    PORTB = (PORTB & ~out_mask_b) | (tube4 & 0x3) << 6 | (tube4 & 0xc) >> 2;
+    PORTC = (PORTC & ~out_mask_c) |
+        (tube3 & 8) >> 3 | (tube3 & 4) >> 1 | (tube3 & 2) << 1 | (tube3 & 1) << 3;
+    PORTD = (PORTD & ~out_mask_d) | (tube2 << 4) | tube1;
 }
 
 void set_digits(uint8_t digit1, uint8_t digit2, uint8_t digit3, uint8_t digit4) {
     set_tubes(digit_map[digit1], digit_map[digit2], digit_map[digit3], digit_map[digit4]);
 }
 
-void i2c_init() {
-    TWSR = 0x00; // Set prescaler bits to zero
-    TWBR = 0x46; // SCL frequency is 50K for 16Mhz
-    TWCR = 0x04; // Enable TWI module.
-}
-
-void i2c_start() {
-    TWCR = ((1 << TWINT) | (1 << TWSTA) | (1 << TWEN));
-    while (!(TWCR & (1 << TWINT)));
-}
-
-void i2c_stop() {
-    TWCR = ((1 << TWINT) | (1 << TWEN) | (1 << TWSTO));
-    _delay_us(100);
-}
-
-void i2c_write(uint8_t data)
-{
-    TWDR = data;
-    TWCR = ((1 << TWINT) | (1 << TWEN));
-    while (!(TWCR & (1 << TWINT)));
-}
-
-uint8_t i2c_read(uint8_t ack)
-{
-    TWCR = ((1 << TWINT) | (1 << TWEN) | (ack << TWEA));
-    while (!(TWCR & (1 << TWINT)));
-    return TWDR;
-}
-
-const uint8_t DS1307_READ_MODE   = 0xd1;
-const uint8_t DS1307_WRITE_MODE  = 0xd0;
-
-const uint8_t DS1307_SEC_REG     = 0x00;
-const uint8_t DS1307_DATE_REG    = 0x04;
-const uint8_t DS1307_CONTROL_REG = 0x07;
-
 typedef struct {
-    uint8_t seconds;
-    uint8_t minutes;
-    uint8_t hours;
-    uint8_t weekDay;
-    uint8_t day;
-    uint8_t month;
-    uint8_t year;
-} datetime_t;
+    // Whether the button was pressed before last update.
+    bool was_pressed;
+    // Whether the button is pressed now.
+    bool pressed;
+    // Milliseconds since boot when last state change happened.
+    uint32_t last_change_millis;
+} button_t;
 
-void rtc_init() {
-    i2c_init();
-    i2c_start();
-
-    i2c_write(DS1307_WRITE_MODE);
-    i2c_write(DS1307_CONTROL_REG);
-
-    i2c_write(0x00); // Disable SQW output.
-
-    i2c_stop();
+void button_init(button_t* btn) {
+    btn->was_pressed = false;
+    btn->pressed = false;
+    btn->last_change_millis = 0;
 }
 
-void rtc_set(datetime_t *dt) {
-    i2c_start();
-
-    i2c_write(DS1307_WRITE_MODE);
-    i2c_write(DS1307_SEC_REG);
-
-    i2c_write(dt->seconds);
-    i2c_write(dt->minutes);
-    i2c_write(dt->hours);
-    i2c_write(dt->weekDay);
-    i2c_write(dt->day);
-    i2c_write(dt->month);
-    i2c_write(dt->year);
-
-    i2c_stop();
-}
-
-void rtc_get(datetime_t* dt) {
-    i2c_start();
-
-    i2c_write(DS1307_WRITE_MODE);
-    i2c_write(DS1307_SEC_REG);
-
-    i2c_stop();
-
-    i2c_start();
-    i2c_write(DS1307_READ_MODE);
-
-    dt->seconds = i2c_read(1);
-    dt->minutes = i2c_read(1);
-    dt->hours = i2c_read(1);
-    dt->weekDay = i2c_read(1);
-    dt->day = i2c_read(1);
-    dt->month = i2c_read(1);
-    dt->year = i2c_read(0);
-
-    i2c_stop();
-}
-
-void demo() {
-    uint8_t digit = 0;
-    while (true) {
-        set_digits(digit, digit, digit, digit);
-        digit = (digit + 1) % 10;
-        _delay_ms(500);
+void button_update(button_t* btn, bool input) {
+    // Debouncing: if last state change happened within 100ms, do nothing.
+    if (millis - btn->last_change_millis < 100) {
+        return;
+    }
+    btn->was_pressed = btn->pressed;
+    btn->pressed = input;
+    if (btn->was_pressed != btn->pressed) {
+        btn->last_change_millis = millis;
     }
 }
 
-static datetime_t initial_time = {
-    .seconds = 0x34,
-    .minutes = 0x12,
-    .hours = 0,
-    .weekDay = 0,
-    .day = 0,
-    .month = 0,
-    .year = 0
-};
-
 int main() {
-    DDRD = 0xff; // PD0-PD3 -> TUBE1, PD4-PD7 -> TUBE2
-    DDRC = 0x0f; // PC0-PC3 -> TUBE3
-    DDRB = (1<<PB0) | (1<<PB1) | (1<<PB6) | (1<<PB7); // TUBE4
-
+    init_timer();
+    init_pins();
     rtc_init();
 
-    rtc_set(&initial_time);
+    bool running = true;
 
-    static datetime_t dt;
+    datetime_t dt;
+    rtc_get(&dt);
+
+    button_t btn1;
+    button_init(&btn1);
+
+    button_t btn2;
+    button_init(&btn2);
 
     while (true) {
-        rtc_get(&dt);
-        set_digits(dt.minutes >> 4,
-                   dt.minutes & 0xf,
-                   dt.seconds >> 4,
-                   dt.seconds & 0xf);
-        _delay_ms(100);
+        button_update(&btn1, (PINB & (1<<PB3)) == 0);
+        button_update(&btn2, (PINB & (1<<PB2)) == 0);
+
+        if (btn1.pressed && !btn1.was_pressed) {
+            millis = 0;
+        }
+
+        if (running) {
+            /*
+            rtc_get(&dt);
+            set_digits(dt.minutes >> 4,
+                       dt.minutes & 0xf,
+                       dt.seconds >> 4,
+                       dt.seconds & 0xf);
+            */
+            uint32_t seconds = millis / 1000;
+            set_digits((seconds / 1000) % 10,
+                       (seconds / 100) % 10,
+                       (seconds / 10) % 10,
+                       seconds % 10);
+        } else {
+            // TODO
+        }
+        // _delay_us(10);
+    }
+
+    while (true) {
     }
 }
