@@ -89,6 +89,7 @@ void button_update(button_t* btn, bool input) {
     }
 }
 
+// Read digits from datatime into an array.
 void get_datetime_digits(datetime_t *dt, uint8_t *digits) {
     digits[0] = dt->hours >> 4;
     digits[1] = dt->hours & 0xf;
@@ -96,6 +97,7 @@ void get_datetime_digits(datetime_t *dt, uint8_t *digits) {
     digits[3] = dt->minutes & 0xf;
 }
 
+// Set datatime from an array of digits.
 void set_datetime_digits(datetime_t *dt, uint8_t *digits) {
     dt->hours = (digits[0] << 4) | digits[1];
     dt->minutes = (digits[2] << 4) | digits[3];
@@ -117,7 +119,8 @@ int main() {
     button_t right_button;
     button_init(&right_button);
 
-    static uint8_t digits[DIGITS_COUNT];      // Digits to display.
+    // Digits to display: HHMM.
+    static uint8_t digits[DIGITS_COUNT];
 
     // State for setting the time.
     uint8_t current_digit;            // What digit we're setting right now.
