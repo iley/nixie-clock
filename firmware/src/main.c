@@ -28,8 +28,10 @@
 // Maps from digit value to Nixie pin number.
 const uint8_t digit_map[] = { 6, 4, 5, 1, 0, 9, 8, 2, 3, 7, 0xf };
 
+// Milliseconds since boot.
 uint32_t millis = 0;
 
+// Set up timer 1 to trigger an interrupt every millisecond.
 void init_timer() {
     TCCR1A = 0x00;
     TIMSK1 = (1 << TOIE1) ; // Timer 1 overflow interrupt.
@@ -43,6 +45,7 @@ ISR(TIMER1_OVF_vect) {
     TCNT1 = TIMER_START;
 }
 
+// Configure GPIO for tubes and buttons.
 void init_pins() {
     DDRB = OUT_MASK_B;
     DDRC = OUT_MASK_C;
@@ -50,6 +53,7 @@ void init_pins() {
     PORTB |= (1<<PB2) | (1<<PB3);  // Enable pull-ups for buttons.
 }
 
+// Write to the BCD decoders.
 void write_tubes(uint8_t tube1, uint8_t tube2, uint8_t tube3, uint8_t tube4) {
     PORTB = (PORTB & ~OUT_MASK_B) | (tube4 & 0x3) << 6 | (tube4 & 0xc) >> 2;
     PORTC = (PORTC & ~OUT_MASK_C) |
