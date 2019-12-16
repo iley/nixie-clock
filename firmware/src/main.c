@@ -7,6 +7,9 @@
 
 #include "rtc.h"
 
+#define MAX(x, y) ((x) > (y) ? (x) : (y))
+#define MIN(x, y) ((x) < (y) ? (x) : (y))
+
 // How many digits the clock has.
 #define DIGITS_COUNT 4
 
@@ -171,13 +174,18 @@ int main() {
                     // First digit can be either 0, 1 or 2.
                     limit = 3;
                 } else if (current_digit == 1 && digits[0] == 2) {
-                    // If first digit is 2, second one can only go up to 4.
-                    limit = 5;
+                    // If first digit is 2, second one can only go up to 3.
+                    limit = 4;
                 } else if (current_digit == 2) {
                     limit = 6;
                 }
                 // Cycle through possible digit values.
                 digits[current_digit] = (digits[current_digit] + 1) % limit;
+
+                // When the first digit changes, second digit might go out of range.
+                if (digits[0] == 2) {
+                    digits[1] = MIN(digits[1], 3);
+                }
             }
 
             // Save the current digits in datetime.
