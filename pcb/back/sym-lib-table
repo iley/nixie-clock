@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name nixie_clock_back-rescue)(type Legacy)(uri ${KIPRJMOD}/nixie_clock_back-rescue.lib)(options "")(descr ""))
+)
