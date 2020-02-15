@@ -1,6 +1,8 @@
 #ifndef _NIXIE_CLOCK_RTC_H
 #define _NIXIE_CLOCK_RTC_H
 
+#include <stdint.h>
+
 typedef struct {
     uint8_t seconds;
     uint8_t minutes;

@@ -19,15 +19,13 @@ void i2c_stop() {
     _delay_us(100);
 }
 
-void i2c_write(uint8_t data)
-{
+void i2c_write(uint8_t data) {
     TWDR = data;
     TWCR = ((1 << TWINT) | (1 << TWEN));
     while (!(TWCR & (1 << TWINT)));
 }
 
-uint8_t i2c_read(uint8_t ack)
-{
+uint8_t i2c_read(uint8_t ack) {
     TWCR = ((1 << TWINT) | (1 << TWEN) | (ack << TWEA));
     while (!(TWCR & (1 << TWINT)));
     return TWDR;
