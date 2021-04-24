@@ -3,18 +3,18 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
-void i2c_init() {
+void i2c_init(void) {
     TWSR = 0x00; // Set prescaler bits to zero
     TWBR = 0x46; // SCL frequency is 50K for 16Mhz
     TWCR = 0x04; // Enable TWI module.
 }
 
-void i2c_start() {
+void i2c_start(void) {
     TWCR = ((1 << TWINT) | (1 << TWSTA) | (1 << TWEN));
     while (!(TWCR & (1 << TWINT)));
 }
 
-void i2c_stop() {
+void i2c_stop(void) {
     TWCR = ((1 << TWINT) | (1 << TWEN) | (1 << TWSTO));
     _delay_us(100);
 }
