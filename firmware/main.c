@@ -111,6 +111,18 @@ void set_datetime_digits(datetime_t *dt, uint8_t *digits) {
     dt->seconds = 0;
 }
 
+// "Screensaver" routine that lights up every digit to extend nixie tube life.
+void screensaver() {
+  static uint8_t digits[DIGITS_COUNT];
+  for (int i = 0; i < 10; i++) {
+    for (int j = 0; j < DIGITS_COUNT; j++) {
+      digits[j] = i;
+      write_digits(digits[0], digits[1], digits[2], digits[3]);
+    }
+    _delay_ms(100);
+  }
+}
+
 int main() {
     init_timer();
     init_pins();
@@ -128,6 +140,8 @@ int main() {
 
     // Digits to display: HHMM.
     static uint8_t digits[DIGITS_COUNT];
+    // The hour of last screensaver run.
+    static uint8_t last_screensaver_hour = 255;
 
     // State for setting the time.
     uint8_t current_digit;            // What digit we're setting right now.
@@ -153,6 +167,13 @@ int main() {
                 current_digit = 0;
                 // Track when this mode was entered, for blinking.
                 setting_start_millis = millis;
+            }
+
+            // Run a screensaver routine at the beginning of every hour.
+            if (dt.seconds == 0 && dt.minutes == 0 && last_screensaver_hour != dt.hours) {
+              screensaver();
+              last_screensaver_hour = dt.hours;
+              continue;
             }
         } else {
             get_datetime_digits(&dt, digits);
