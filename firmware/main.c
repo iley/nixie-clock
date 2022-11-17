@@ -28,6 +28,9 @@
 // PD0-PD3 -> TUBE1, PD4-PD7 -> TUBE2
 #define OUT_MASK_D 0xff
 
+// How long every digit is shown during screensaver loop.
+#define SCREENSAVER_DELAY 200
+
 // Maps from digit value to Nixie pin number.
 const uint8_t digit_map[] = { 6, 4, 5, 1, 0, 9, 8, 2, 3, 7, 0xf };
 
@@ -119,7 +122,7 @@ void screensaver() {
       digits[j] = i;
       write_digits(digits[0], digits[1], digits[2], digits[3]);
     }
-    _delay_ms(100);
+    _delay_ms(SCREENSAVER_DELAY);
   }
 }
 
