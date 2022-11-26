@@ -1,18 +1,22 @@
 #include <stdio.h>
 #include <stdint.h>
+
 #include "pico/stdlib.h"
+#include "hardware/pio.h"
+#include "hardware/clocks.h"
+#include "blink.pio.h"
+
+void blink_pin(PIO pio, uint state_machine, uint offset, uint pin, uint freq) {
+  blink_program_init(pio, state_machine, offset, pin);
+  pio_sm_set_enabled(pio, state_machine, true);
+  pio->txf[state_machine] = (clock_get_hz(clk_sys) / (2 * freq)) - 3;
+}
 
 int main() {
-  const uint32_t LED_PIN = PICO_DEFAULT_LED_PIN;
-  gpio_init(LED_PIN);
-  gpio_set_dir(LED_PIN, GPIO_OUT);
+  PIO pio = pio0;
 
-  while (true) {
-    gpio_put(LED_PIN, 1);
-    sleep_ms(250);
-    gpio_put(LED_PIN, 0);
-    sleep_ms(250);
-  }
+  uint offset = pio_add_program(pio, &blink_program);
+  blink_pin(pio, 0, offset, PICO_DEFAULT_LED_PIN, 10);
 
   return 0;
 }
