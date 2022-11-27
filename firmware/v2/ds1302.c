@@ -3,12 +3,13 @@
 #define EPOCH_START_YEAR 2000
 
 enum command_t {
-  CMD_CLOCK_BURST_READ = 0xbf,
+  CMD_CLOCK_BURST_READ  = 0xbf,
   CMD_CLOCK_BURST_WRITE = 0xbe,
 };
 
 enum register_t {
-  REG_SECONDS = 0x00,
+  REG_SECONDS         = 0x0,
+  REG_TRICKLE_CHARGER = 0x8,
 };
 
 static void spi_begin(ds1302_t* device);
@@ -77,10 +78,19 @@ void ds1302_get_time(ds1302_t* device, datetime_t* output) {
   spi_end(device);
 }
 
+void ds1302_enable_charger(ds1302_t* device, uint8_t diode_select, uint8_t resistor_select) {
+  uint8_t value = 0xa0 | ((diode_select & 0x3) << 2) | (resistor_select & 0x3);
+  ds1302_write_register(device, REG_TRICKLE_CHARGER, value);
+}
+
+void ds1302_disable_charger(ds1302_t* device) {
+  ds1302_write_register(device, REG_TRICKLE_CHARGER, 0);
+}
+
 static void ds1302_write_register(ds1302_t* device, uint8_t register_, uint8_t data) {
   spi_begin(device);
   uint8_t command = (0x80 | (register_ << 1));
-  spi_write_before_read(device, command);
+  spi_write(device, command);
   spi_write(device, data);
   spi_end(device);
 }
