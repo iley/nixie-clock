@@ -2,15 +2,11 @@
 
 #define EPOCH_START_YEAR 2000
 
-enum command_t {
-  CMD_CLOCK_BURST_READ  = 0xbf,
-  CMD_CLOCK_BURST_WRITE = 0xbe,
-};
+#define CMD_CLOCK_BURST_READ  0xbf
+#define CMD_CLOCK_BURST_WRITE 0xbe
 
-enum register_t {
-  REG_SECONDS         = 0x0,
-  REG_TRICKLE_CHARGER = 0x8,
-};
+#define REG_SECONDS         0x0
+#define REG_TRICKLE_CHARGER 0x8
 
 static void spi_begin(ds1302_t* device);
 static void spi_end(ds1302_t* device);
