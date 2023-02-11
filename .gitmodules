@@ -1,0 +1,3 @@
+[submodule "pcb/third_party/kicad_rp_pico"]
+	path = pcb/third_party/kicad_rp_pico
+	url = https://github.com/ncarandini/KiCad-RP-Pico.git
