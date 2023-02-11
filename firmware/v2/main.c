@@ -27,6 +27,7 @@ int main() {
   datetime_t prev_dt;
 
   while (true) {
+    /*
     if (!gpio_get(PIN_BUTTON)) {
       // Reset clock.
       datetime_t initial_time = {
@@ -48,6 +49,9 @@ int main() {
       printf("%d-%d-%d %d:%d:%d\n", dt.year, dt.month, dt.day, dt.hour, dt.min, dt.sec);
     }
     prev_dt = dt;
+    */
+
+    ds1302_disable_charger(&ds1302);
   }
 
   return 0;

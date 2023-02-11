@@ -8,6 +8,9 @@
 #define REG_SECONDS         0x0
 #define REG_TRICKLE_CHARGER 0x8
 
+#define SPEED_DIVIDER 100
+
+
 static void spi_begin(ds1302_t* device);
 static void spi_end(ds1302_t* device);
 static void spi_write(ds1302_t* device, uint8_t data);
@@ -21,9 +24,9 @@ static uint8_t decode_hours(uint8_t value);
 
 static inline void toggle_pin(uint pin) {
   gpio_put(pin, 1);
-  sleep_us(1);
+  sleep_us(1*SPEED_DIVIDER);
   gpio_put(pin, 0);
-  sleep_us(1);
+  sleep_us(1*SPEED_DIVIDER);
 }
 
 void ds1302_init(ds1302_t* device, uint ce_pin, uint sclk_pin, uint io_pin) {
@@ -103,12 +106,12 @@ static uint8_t ds1302_read_register(ds1302_t* device, uint8_t register_) {
 static void spi_begin(ds1302_t* device) {
   gpio_put(device->sclk_pin, 0);
   gpio_put(device->ce_pin, 1);
-  sleep_us(4);
+  sleep_us(4*SPEED_DIVIDER);
 }
 
 static void spi_end(ds1302_t* device) {
   gpio_put(device->ce_pin, 0);
-  sleep_us(4);
+  sleep_us(4*SPEED_DIVIDER);
 }
 
 static void spi_write(ds1302_t* device, uint8_t data) {
@@ -116,7 +119,7 @@ static void spi_write(ds1302_t* device, uint8_t data) {
 
   for (int i = 0; i < 8; i++) {
     gpio_put(device->io_pin, (data >> i) & 1);
-    sleep_us(1);
+    sleep_us(1*SPEED_DIVIDER);
     toggle_pin(device->sclk_pin);
   }
 }
@@ -126,14 +129,14 @@ static void spi_write_before_read(ds1302_t* device, uint8_t data) {
 
   for (int i = 0; i < 7; i++) {
     gpio_put(device->io_pin, (data >> i) & 1);
-    sleep_us(1);
+    sleep_us(1*SPEED_DIVIDER);
     toggle_pin(device->sclk_pin);
   }
 
   gpio_put(device->io_pin, (data >> 7) & 1);
-  sleep_us(1);
+  sleep_us(1*SPEED_DIVIDER);
   gpio_put(device->sclk_pin, 1);
-  sleep_us(1);
+  sleep_us(1*SPEED_DIVIDER);
   // Leave SCLK high on the last cycle.
 }
 
