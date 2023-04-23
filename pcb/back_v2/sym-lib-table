@@ -1,3 +1,6 @@
 (sym_lib_table
+  (version 7)
   (lib (name "nixie_clock")(type "Legacy")(uri "${KIPRJMOD}/../lib/nixie_clock.lib")(options "")(descr ""))
+  (lib (name "MCU_RaspberryPi_and_Boards")(type "KiCad")(uri "${KIPRJMOD}/../third_party/kicad_rp_pico/RP-Pico Libraries/MCU_RaspberryPi_and_Boards.kicad_sym")(options "")(descr ""))
+  (lib (name "Espressif")(type "KiCad")(uri "${KIPRJMOD}/../lib/espressif/libraries/Espressif.kicad_sym")(options "")(descr ""))
 )

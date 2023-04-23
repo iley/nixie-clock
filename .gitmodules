@@ -1,3 +1,9 @@
 [submodule "pcb/third_party/kicad_rp_pico"]
 	path = pcb/third_party/kicad_rp_pico
 	url = https://github.com/ncarandini/KiCad-RP-Pico.git
+[submodule "pcb/lib/kicad-libraries"]
+	path = pcb/lib/kicad-libraries
+	url = https://github.com/espressif/kicad-libraries.git
+[submodule "pcb/lib/espressif"]
+	path = pcb/lib/espressif
+	url = https://github.com/espressif/kicad-libraries.git
