@@ -4,6 +4,12 @@
 
   (paper "A4")
 
+  (title_block
+    (title "Nixie Clock Back Panel")
+    (rev "3.0")
+    (company "Ilya Strukov")
+  )
+
   (lib_symbols
     (symbol "Connector:Conn_01x06_Socket" (pin_names (offset 1.016) hide) (in_bom yes) (on_board yes)
       (property "Reference" "J" (at 0 7.62 0)
@@ -1705,7 +1711,7 @@
     )
     (pin "1" (uuid 05b463c9-b880-461b-9e36-bf3584bb2525))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "#PWR019") (unit 1)
         )
@@ -1730,7 +1736,7 @@
     )
     (pin "1" (uuid 96bf9b55-eeec-491e-9376-53435bee4765))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "#PWR08") (unit 1)
         )
@@ -1755,7 +1761,7 @@
     )
     (pin "1" (uuid 1f804de6-a4cc-4dd2-8b11-b1430490e92d))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "#PWR025") (unit 1)
         )
@@ -1780,7 +1786,7 @@
     )
     (pin "1" (uuid 5eba5d8a-14a7-4c63-825e-52c1871dca03))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "#PWR032") (unit 1)
         )
@@ -1805,7 +1811,7 @@
     )
     (pin "1" (uuid 0925d1cc-87f5-4b6b-98e3-6eed52f4e4d8))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "#PWR031") (unit 1)
         )
@@ -1831,7 +1837,7 @@
     (pin "1" (uuid 09dab271-e525-43eb-9c6d-49c54e44ed92))
     (pin "2" (uuid e0328fc7-f765-4148-8e6f-690d6d1394e5))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "R2") (unit 1)
         )
@@ -1856,7 +1862,7 @@
     )
     (pin "1" (uuid 55aa4a31-3987-4e33-9f95-d5cd2e9b3fab))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "#PWR017") (unit 1)
         )
@@ -1881,7 +1887,7 @@
     )
     (pin "1" (uuid ebac6f7a-322c-4cae-bdd2-1a7a0a3ffdac))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "#PWR04") (unit 1)
         )
@@ -1907,7 +1913,7 @@
     (pin "1" (uuid 7e8b9bcb-1b94-4797-8363-73ab23a5abcf))
     (pin "2" (uuid e6bb3e7f-22b2-412e-aa08-c79e080cc06c))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "SW1") (unit 1)
         )
@@ -1932,7 +1938,7 @@
     )
     (pin "1" (uuid 8c950d53-d68e-41eb-a326-07dc6dd59da1))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "#PWR022") (unit 1)
         )
@@ -1957,7 +1963,7 @@
     )
     (pin "1" (uuid 945a4615-2534-4903-a707-4cda7ba613e3))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "#PWR026") (unit 1)
         )
@@ -1982,7 +1988,7 @@
     )
     (pin "1" (uuid c18f86fe-641d-4dc2-818e-2940e789915a))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "#PWR029") (unit 1)
         )
@@ -2008,7 +2014,7 @@
     (pin "1" (uuid 4d301f9b-2a8f-4182-8f15-c24afdae43a6))
     (pin "2" (uuid 3c9d6983-949d-4cf6-8fea-09511a25ca16))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "J3") (unit 1)
         )
@@ -2034,7 +2040,7 @@
     (pin "1" (uuid 9cc3ffc5-220d-46d2-bf6e-bba9771e3004))
     (pin "2" (uuid 0d289572-2a2c-4a34-9d0b-5c32d654567e))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "SW2") (unit 1)
         )
@@ -2059,7 +2065,7 @@
     )
     (pin "1" (uuid a1cbbef2-8d5b-4950-8a83-4d9b9112547c))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "#PWR010") (unit 1)
         )
@@ -2084,7 +2090,7 @@
     )
     (pin "1" (uuid efe0a504-bb7a-4c3a-b607-52ac9a08cd7a))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "#PWR028") (unit 1)
         )
@@ -2110,7 +2116,7 @@
     (pin "1" (uuid 65df0c91-ed6e-4ef7-8d99-7cb3741bcfb2))
     (pin "2" (uuid 90ec5c9a-c2f9-4ed6-8a53-bc4a3aefb9a3))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "R4") (unit 1)
         )
@@ -2136,7 +2142,7 @@
     (pin "1" (uuid 037900b1-ef34-40f3-822c-736b498b94e0))
     (pin "2" (uuid 842cb4b8-80a7-4a38-819a-8273a06949e2))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "BT1") (unit 1)
         )
@@ -2162,7 +2168,7 @@
     (pin "1" (uuid 037abe59-b22d-4b87-a0d9-7797db3cedeb))
     (pin "2" (uuid e8c5ca57-e177-45dc-a925-85b4ecef8af5))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "JP1") (unit 1)
         )
@@ -2194,7 +2200,7 @@
     (pin "7" (uuid a20bc6b6-bb99-4caa-a15a-a5fd47a89b91))
     (pin "8" (uuid 700e59a4-3c37-4660-9849-c17600cc4256))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "U1") (unit 1)
         )
@@ -2219,7 +2225,7 @@
     )
     (pin "1" (uuid 6a4d1e70-d285-4730-a6a9-3455b6370bd2))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "#PWR016") (unit 1)
         )
@@ -2245,7 +2251,7 @@
     (pin "1" (uuid 3a2f9f40-90b3-43a6-9aa1-293936ffaf45))
     (pin "2" (uuid 6104a727-c09b-4577-acc6-caf6c1dffbd6))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "C3") (unit 1)
         )
@@ -2271,7 +2277,7 @@
     (pin "1" (uuid ebe40b03-ad5f-4b67-b6fa-9a5dd989a745))
     (pin "2" (uuid 5910b504-316b-4627-a22e-ab7012cb437f))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "R3") (unit 1)
         )
@@ -2296,7 +2302,7 @@
     )
     (pin "1" (uuid 97bfca94-a014-49c9-b058-df9497b185eb))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "#PWR011") (unit 1)
         )
@@ -2321,7 +2327,7 @@
     )
     (pin "1" (uuid 238c804c-ae22-4e42-8837-09ca5243ef93))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "#PWR013") (unit 1)
         )
@@ -2346,7 +2352,7 @@
     )
     (pin "1" (uuid 13966010-a048-44be-af75-139925a19b9a))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "#PWR03") (unit 1)
         )
@@ -2371,7 +2377,7 @@
     )
     (pin "1" (uuid 9b0ccf4e-6d1a-48bf-a4e4-3f267369aaa2))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "#PWR020") (unit 1)
         )
@@ -2396,7 +2402,7 @@
     )
     (pin "1" (uuid f544562a-6251-4644-bd33-8f7c5638c31f))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "#PWR012") (unit 1)
         )
@@ -2421,7 +2427,7 @@
     )
     (pin "1" (uuid 7f89883f-4ece-4115-917c-8be9c82b8af9))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "#PWR023") (unit 1)
         )
@@ -2446,7 +2452,7 @@
     )
     (pin "1" (uuid 50ee1df4-a767-4c90-b668-394a6b242437))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "#PWR018") (unit 1)
         )
@@ -2471,7 +2477,7 @@
     )
     (pin "1" (uuid ea1260c5-5ed4-448d-a044-6667a997bb2c))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "#PWR07") (unit 1)
         )
@@ -2496,7 +2502,7 @@
     )
     (pin "1" (uuid 82100996-60da-4e27-aaf4-e36605c604ef))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "#PWR01") (unit 1)
         )
@@ -2522,7 +2528,7 @@
     (pin "1" (uuid a5e58224-5b2a-4af3-8841-185af264c401))
     (pin "2" (uuid 73bec1cc-da80-4ebb-826d-ab91b20f8f35))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "C1") (unit 1)
         )
@@ -2547,7 +2553,7 @@
     )
     (pin "1" (uuid 508cd0a7-a7f6-4ea8-835a-f5995d5c6650))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "#PWR09") (unit 1)
         )
@@ -2603,7 +2609,7 @@
     (pin "8" (uuid c5fb4722-0040-43cb-a115-22e7162105c1))
     (pin "9" (uuid 57b3353d-4433-49fa-8bd3-aa6ad2217a75))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "U2") (unit 1)
         )
@@ -2630,7 +2636,7 @@
     (pin "2" (uuid 27e0fe83-5870-4834-b932-f61f1f92293a))
     (pin "3" (uuid a7866dc3-3d16-4f55-a40d-90d53c1211e1))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "J4") (unit 1)
         )
@@ -2644,7 +2650,7 @@
     (property "Reference" "J6" (at 153.67 114.3 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Value" "RIGHT" (at 153.67 111.76 0)
+    (property "Value" "CONN_RIGHT" (at 153.67 111.76 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Footprint" "Connector_PinSocket_2.54mm:PinSocket_1x10_P2.54mm_Vertical" (at 154.94 111.76 0)
@@ -2664,7 +2670,7 @@
     (pin "8" (uuid 878b1df9-7100-42d3-9010-0a17ad0938db))
     (pin "9" (uuid 39cb3324-1257-48f4-9597-1ee0048130af))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "J6") (unit 1)
         )
@@ -2692,7 +2698,7 @@
     (pin "3" (uuid db2080f3-575b-4d45-b300-9ac76d1e282e))
     (pin "4" (uuid 464825fc-12d5-49d2-84dd-1c2722df2b9f))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "J2") (unit 1)
         )
@@ -2718,7 +2724,7 @@
     (pin "1" (uuid 475ca127-91eb-4ba0-80d2-0f1c5e698b3c))
     (pin "2" (uuid 013402e3-2900-420a-8af5-cd88d60c9d2d))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "R6") (unit 1)
         )
@@ -2743,7 +2749,7 @@
     )
     (pin "1" (uuid c67175da-a6e0-474b-8fe6-14480bffde99))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "#PWR06") (unit 1)
         )
@@ -2768,7 +2774,7 @@
     )
     (pin "1" (uuid 86ebccd4-cad6-4e1d-a74b-e3b46b30b5b8))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "#PWR014") (unit 1)
         )
@@ -2794,7 +2800,7 @@
     (pin "1" (uuid 2ae53e89-9a38-4193-a95a-af8f8d4d63b8))
     (pin "2" (uuid c634ccfd-d93f-427a-b497-8945aa281ded))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "R7") (unit 1)
         )
@@ -2819,7 +2825,7 @@
     )
     (pin "1" (uuid a242d9c2-15c1-4a30-bf98-706b37358740))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "#PWR027") (unit 1)
         )
@@ -2844,7 +2850,7 @@
     )
     (pin "1" (uuid a0e9fcb2-ee4f-479f-988a-55851f330606))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "#PWR05") (unit 1)
         )
@@ -2870,7 +2876,7 @@
     (pin "1" (uuid 6d34192f-24e6-4717-89d5-b01c73f37dbe))
     (pin "2" (uuid 80a1326a-699a-446c-9323-37454aa49314))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "R1") (unit 1)
         )
@@ -2900,7 +2906,7 @@
     (pin "5" (uuid e28fa970-68ab-4709-98f1-a64a37ec611f))
     (pin "6" (uuid e7588a0e-6891-4374-8be0-683b5e08e2da))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "J1") (unit 1)
         )
@@ -2926,7 +2932,7 @@
     (pin "1" (uuid 148537ef-17f3-4ee4-b545-5f2647b91240))
     (pin "2" (uuid c68c875f-80b2-459f-8929-e6e5a890824a))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "C4") (unit 1)
         )
@@ -2951,7 +2957,7 @@
     )
     (pin "1" (uuid 4d6f1bfe-cc31-4f0b-96d2-a19d236c9e31))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "#PWR015") (unit 1)
         )
@@ -2976,7 +2982,7 @@
     )
     (pin "1" (uuid b94a0c26-2785-4626-aee0-e86cd66029d8))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "#PWR033") (unit 1)
         )
@@ -3001,7 +3007,7 @@
     )
     (pin "1" (uuid 86f083fa-4246-4c28-9aaa-2f19f47acf67))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "#PWR02") (unit 1)
         )
@@ -3026,7 +3032,7 @@
     )
     (pin "1" (uuid ea54ef00-b9c5-4027-9ac3-2849146a4b83))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "#PWR030") (unit 1)
         )
@@ -3051,7 +3057,7 @@
     )
     (pin "1" (uuid fedafc4a-dff3-4869-97ab-4587a1e7dada))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "#PWR024") (unit 1)
         )
@@ -3065,7 +3071,7 @@
     (property "Reference" "J5" (at 31.75 114.3 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Value" "LEFT" (at 31.75 111.76 0)
+    (property "Value" "CONN_LEFT" (at 31.75 111.76 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Footprint" "Connector_PinSocket_2.54mm:PinSocket_1x10_P2.54mm_Vertical" (at 33.02 111.76 0)
@@ -3085,7 +3091,7 @@
     (pin "8" (uuid aa08e1c0-21d0-48c3-9ee2-5409f3e7e193))
     (pin "9" (uuid 81632af3-539d-4149-b90a-968c1dbcfa7a))
     (instances
-      (project "nixie_back_v2"
+      (project "nixie_back_v3"
         (path "/5f5f2a04-934c-41e7-a231-3b002410944f"
           (reference "J5") (unit 1)
         )
