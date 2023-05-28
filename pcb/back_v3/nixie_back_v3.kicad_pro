@@ -34,9 +34,9 @@
         "other_text_thickness": 0.15,
         "other_text_upright": false,
         "pads": {
-          "drill": 0.762,
-          "height": 1.524,
-          "width": 1.524
+          "drill": 1.0,
+          "height": 1.7,
+          "width": 1.7
         },
         "silk_line_width": 0.15,
         "silk_text_italic": false,
@@ -55,13 +55,7 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [
-        "starved_thermal|112500000|92000000|73f58b92-8027-4a9a-b2d5-c636fdb2444a|e0ed1b26-bed6-4401-84d7-c2e34c533929|F.Cu",
-        "unconnected_items|111100000|73363604|4a2b6bc0-5e51-4457-b480-8b724294661b|11953e63-0e06-41a1-9bce-689a1fd66eef",
-        "unconnected_items|111100000|73363604|d60398f1-b389-434e-b76b-45c331ea8c95|06937c40-83b0-42f0-a82f-189808125705",
-        "unconnected_items|111100000|73363604|d60398f1-b389-434e-b76b-45c331ea8c95|11953e63-0e06-41a1-9bce-689a1fd66eef",
-        "unconnected_items|95590000|75490000|2e5e469a-2122-42bc-85c6-a889c345435a|b4baf3b1-761b-48b0-9a6f-4a56d8fd9371"
-      ],
+      "drc_exclusions": [],
       "meta": {
         "version": 2
       },
@@ -477,7 +471,7 @@
       },
       {
         "netclass": "Power",
-        "pattern": "UART_VCC"
+        "pattern": "/UART_VCC"
       }
     ]
   },
