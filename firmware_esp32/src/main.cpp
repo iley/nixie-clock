@@ -7,8 +7,8 @@ byte tubePins[tubeCount * pinsPerTube] = {
 // A   B   C   D
   15,  2,  4, 16, // 1
   17,  5, 18, 19, // 2
-  27, 26, 25, 23,  // 3
-  35, 34, 39, 36,  // 4
+  12, 14, 27, 26, // 3
+  25, 33, 32, 23, // 4
 };
 
 void outputTubeDigit(int tubeIndex, byte value) {
