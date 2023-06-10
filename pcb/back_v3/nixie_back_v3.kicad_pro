@@ -55,7 +55,9 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [],
+      "drc_exclusions": [
+        "starved_thermal|112500000|92000000|73f58b92-8027-4a9a-b2d5-c636fdb2444a|e0ed1b26-bed6-4401-84d7-c2e34c533929|F.Cu"
+      ],
       "meta": {
         "version": 2
       },
