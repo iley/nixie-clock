@@ -488,7 +488,7 @@
       "idf": "",
       "netlist": "nixie_clock_front.net",
       "specctra_dsn": "",
-      "step": "",
+      "step": "nixie_clock_front.step",
       "vrml": ""
     },
     "page_layout_descr_file": ""

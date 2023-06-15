@@ -35,18 +35,4 @@ void loop() {
   digit = (digit + 1) % 10;
 
   delay(500);
-
-  /*
-  for (int i = 0; i < tubeCount * pinsPerTube; i++) {
-    digitalWrite(tubePins[i], 1);
-  }
-  Serial.println("ON");
-  delay(1000);
-
-  for (int i = 0; i < tubeCount * pinsPerTube; i++) {
-    digitalWrite(tubePins[i], 0);
-  }
-  Serial.println("OFF");
-  delay(1000);
-  */
 }
