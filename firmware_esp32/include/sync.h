@@ -1,0 +1,4 @@
+#ifndef _NIXIE_CLOCK_SYNC_H
+#define _NIXIE_CLOCK_SYNC_H
+
+#endif // _NIXIE_CLOCK_SYNC_H

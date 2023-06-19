@@ -1,38 +1,59 @@
 #include <Arduino.h>
 
-constexpr const int tubeCount = 4;
-constexpr const int pinsPerTube = 4;
+#include "rtc.h"
+#include "sync.h"
+#include "tubes.h"
 
-byte tubePins[tubeCount * pinsPerTube] = {
-// A   B   C   D
-  15,  2,  4, 16, // 1
-  17,  5, 18, 19, // 2
-  12, 14, 27, 26, // 3
-  25, 33, 32, 23, // 4
-};
-
-void outputTubeDigit(int tubeIndex, byte value) {
-  byte* pins = tubePins + (tubeIndex * pinsPerTube);
-  digitalWrite(pins[0], value & 1);
-  digitalWrite(pins[1], (value >> 1) & 1);
-  digitalWrite(pins[2], (value >> 2) & 1);
-  digitalWrite(pins[3], (value >> 3) & 1);
+void outputDateTime(struct tm* now) {
+  byte hour_high = now->tm_hour / 10;
+  byte hour_low = now->tm_hour % 10;
+  byte min_high = now->tm_min / 10;
+  byte min_low = now->tm_min % 10;
+  outputTubeDigits(hour_high, hour_low, min_high, min_low);
 }
 
 void setup() {
-  for (int i = 0; i < tubeCount * pinsPerTube; i++) {
-    pinMode(tubePins[i], OUTPUT);
+  Serial.begin(115200);
+
+  Serial.println("Initializing GPIO");
+  tubesSetup();
+
+  Serial.print("Initializing RTC... ");
+  bool success = rtcSetup();
+  if (success) {
+    Serial.println("DONE");
+  } else {
+    Serial.println("FAIL");
   }
 }
 
-void loop() {
-  static int digit = 0;
+void printDateTime(struct tm* datetime) {
+  Serial.print(datetime.tm_hour);
+  Serial.print(":");
+  Serial.print(datetime.tm_min);
+  Serial.print(":");
+  Serial.print(datetime.tm_sec);
+}
 
-  for (int tubeIndex = 0; tubeIndex < tubeCount; tubeIndex++) {
-    outputTubeDigit(tubeIndex, digit);
+void syncClock() {
+  struct tm now;
+
+  bool success = fetchCurrentTimeFromNtp();
+  if (!success) {
+    Serial.println("Failed to fetch current time from NTP");
+    return;
   }
 
-  digit = (digit + 1) % 10;
+  rtcSetCurrentTime(&now);
+  Serial.print("Synced clock successfully. Current time: ");
+  printDateTime(&now);
+  Serial.println();
+}
 
-  delay(500);
+void loop() {
+  struct tm now;
+  rtcGetCurrentTime(&now);
+
+  outputDateTime(&now);
+  delay(100);
 }
