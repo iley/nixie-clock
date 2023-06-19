@@ -4,11 +4,16 @@
 #include "sync.h"
 #include "tubes.h"
 
+// Stores the last sync day number to avoid repeatedly re-syncing at 00:00.
+static int last_sync_yday;
+
 void outputDateTime(struct tm*);
 void syncClock();
 void printDateTime(struct tm* datetime);
 
 void setup() {
+  last_sync_yday = -1;
+
   Serial.begin(115200);
 
   Serial.println("Initializing GPIO");
@@ -33,8 +38,13 @@ void loop() {
   struct tm now;
   rtcGetCurrentTime(&now);
 
+  if (now.tm_hour == 0 && now.tm_min == 0 && now.tm_sec == 0 && last_sync_yday != now.tm_yday) {
+    syncClock();
+    rtcGetCurrentTime(&now);
+    last_sync_yday = now.tm_yday;
+  }
+
   outputDateTime(&now);
-  delay(100);
 }
 
 void outputDateTime(struct tm* now) {
