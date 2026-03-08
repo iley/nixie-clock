@@ -7,9 +7,9 @@
 // Stores the last sync day number to avoid repeatedly re-syncing at 00:00.
 static int last_sync_yday;
 
-void outputDateTime(struct tm*);
+void outputDateTime(struct tm *);
 void syncClock();
-void printDateTime(struct tm* datetime);
+void printDateTime(struct tm *datetime);
 
 void setup() {
   last_sync_yday = -1;
@@ -38,7 +38,10 @@ void loop() {
   struct tm now;
   rtcGetCurrentTime(&now);
 
-  if (now.tm_hour == 0 && now.tm_min == 0 && now.tm_sec == 0 && last_sync_yday != now.tm_yday) {
+  // Sync the clock at 4:00:00 every day. This way we should account for DST
+  // changes.
+  if (now.tm_hour == 4 && now.tm_min == 0 && now.tm_sec == 0 &&
+      last_sync_yday != now.tm_yday) {
     syncClock();
     rtcGetCurrentTime(&now);
     last_sync_yday = now.tm_yday;
@@ -47,7 +50,7 @@ void loop() {
   outputDateTime(&now);
 }
 
-void outputDateTime(struct tm* now) {
+void outputDateTime(struct tm *now) {
   byte hour_high = now->tm_hour / 10;
   byte hour_low = now->tm_hour % 10;
   byte min_high = now->tm_min / 10;
@@ -71,7 +74,7 @@ void syncClock() {
   Serial.println();
 }
 
-void printDateTime(struct tm* datetime) {
+void printDateTime(struct tm *datetime) {
   Serial.print(datetime->tm_hour);
   Serial.print(":");
   Serial.print(datetime->tm_min);
