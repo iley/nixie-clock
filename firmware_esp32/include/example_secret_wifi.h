@@ -2,6 +2,6 @@
 #define _NIXIE_CLOCK_SECRET_WIFI_H
 
 #define SECRET_WIFI_SSID "mywifi"
-#define SECERT_WIFI_PASS "mypass"
+#define SECRET_WIFI_PASS "mypass"
 
 #endif // _NIXIE_CLOCK_SECRET_WIFI_H
