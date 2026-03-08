@@ -38,8 +38,7 @@ void loop() {
   struct tm now;
   rtcGetCurrentTime(&now);
 
-  // Sync the clock at 4:00:00 every day. This way we should account for DST
-  // changes.
+  // Sync the clock at 04:00 UTC every day.
   if (now.tm_hour == 4 && now.tm_min == 0 && now.tm_sec == 0 &&
       last_sync_yday != now.tm_yday) {
     syncClock();
@@ -47,7 +46,10 @@ void loop() {
     last_sync_yday = now.tm_yday;
   }
 
-  outputDateTime(&now);
+  // RTC stores UTC; convert to local time (with DST) for display.
+  struct tm local;
+  utcToLocal(&now, &local);
+  outputDateTime(&local);
 }
 
 void outputDateTime(struct tm *now) {
@@ -69,8 +71,10 @@ void syncClock() {
 
   rtcSetCurrentTime(&now);
 
+  struct tm local;
+  utcToLocal(&now, &local);
   Serial.print("Synced clock successfully. Current time: ");
-  printDateTime(&now);
+  printDateTime(&local);
   Serial.println();
 }
 
