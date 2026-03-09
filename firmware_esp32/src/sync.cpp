@@ -23,6 +23,13 @@ void utcToLocal(const struct tm* utc, struct tm* local) {
   gmtime_r(&local_epoch, local);
 }
 
+void localToUtc(const struct tm* local, struct tm* utc) {
+  struct tm tmp = *local;
+  time_t local_epoch = mktime(&tmp);
+  time_t utc_epoch = localTimezone.toUTC(local_epoch);
+  gmtime_r(&utc_epoch, utc);
+}
+
 bool fetchCurrentTimeFromNtp(struct tm* datetime) {
   Serial.println("Connecting to WiFi " SECRET_WIFI_SSID);
   WiFi.begin(SECRET_WIFI_SSID, SECRET_WIFI_PASS);
