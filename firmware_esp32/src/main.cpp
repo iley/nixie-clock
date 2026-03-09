@@ -8,6 +8,9 @@
 // Stores the last sync day number to avoid repeatedly re-syncing at 04:00.
 static int last_sync_yday;
 
+// Whether NTP sync has ever succeeded (i.e. WiFi is reachable).
+static bool ntp_available = false;
+
 // --- Button debouncing ---
 
 static const int kButtonA = 34;
@@ -117,7 +120,7 @@ void loop() {
       return;
     }
 
-    if (right_up) {
+    if (right_up && ntp_available) {
       Serial.println("Manual NTP sync requested");
       syncClock();
       return;
@@ -216,6 +219,7 @@ void syncClock() {
     return;
   }
 
+  ntp_available = true;
   rtcSetCurrentTime(&now);
 
   struct tm local;
