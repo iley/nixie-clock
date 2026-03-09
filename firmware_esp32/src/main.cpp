@@ -122,6 +122,20 @@ void loop() {
 
     if (right_up && ntp_available) {
       Serial.println("Manual NTP sync requested");
+      // Blink digits left to right as visual feedback.
+      byte d[4] = {
+        (byte)(local.tm_hour / 10), (byte)(local.tm_hour % 10),
+        (byte)(local.tm_min / 10),  (byte)(local.tm_min % 10),
+      };
+      for (int i = 0; i < 4; i++) {
+        byte saved = d[i];
+        d[i] = 10;  // blank
+        outputTubeDigits(d[0], d[1], d[2], d[3]);
+        delay(150);
+        d[i] = saved;
+        outputTubeDigits(d[0], d[1], d[2], d[3]);
+        delay(50);
+      }
       syncClock();
       return;
     }
