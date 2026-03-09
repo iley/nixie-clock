@@ -112,8 +112,14 @@ void loop() {
     struct tm local;
     utcToLocal(&now, &local);
 
-    if (left_up || right_up) {
+    if (left_up) {
       enterTimeSetting(&local);
+      return;
+    }
+
+    if (right_up) {
+      Serial.println("Manual NTP sync requested");
+      syncClock();
       return;
     }
 
