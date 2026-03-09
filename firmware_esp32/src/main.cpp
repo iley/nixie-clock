@@ -1,5 +1,6 @@
 #include <Arduino.h>
 
+#include "ota.h"
 #include "rtc.h"
 #include "sync.h"
 #include "tubes.h"
@@ -18,6 +19,7 @@ void setup() {
 
   Serial.println("Initializing GPIO");
   tubesSetup();
+  otaSetup();
 
   // Output zeroes to show that the clock is initializing.
   outputTubeDigits(0, 0, 0, 0);
@@ -35,6 +37,10 @@ void setup() {
 }
 
 void loop() {
+  if (otaCheckButtons()) {
+    otaEnterMode();
+  }
+
   struct tm now;
   rtcGetCurrentTime(&now);
 
